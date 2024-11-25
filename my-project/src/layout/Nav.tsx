@@ -4,7 +4,7 @@ import { MdMenu, MdMenuOpen } from "react-icons/md";
 import { observer } from "mobx-react-lite";
 
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/react.svg"
+import logo from "../assets/my-furniture.png"
 
 export default observer(function NavBar({ toggleSidebar, isSidebarOpen }: any) {
   
@@ -12,7 +12,7 @@ export default observer(function NavBar({ toggleSidebar, isSidebarOpen }: any) {
   return (
     <Navbar className="bg-gray-100 drop-shadow-sm" fluid rounded>
       <Navbar.Brand href="/">
-        <img src={logo} className=" ml-3 mr-3 h-10" alt="Flowbite React Logo" />
+        <img src={logo} className="h-10" alt="Flowbite React Logo" />
         {/* <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">React App</span> */}
 
       </Navbar.Brand>
@@ -31,14 +31,12 @@ export default observer(function NavBar({ toggleSidebar, isSidebarOpen }: any) {
         >
           <Dropdown.Header>
             <span className="block text-base font-thin"> "User"</span>
-            <span className="block truncate text-sm">.user?.email</span>
+            
           </Dropdown.Header>
-          {/* <Dropdown.Item href="/" icon={HiViewGrid}>Dashboard</Dropdown.Item>
-          <Dropdown.Item icon={HiCog}>Settings</Dropdown.Item>
-          <Dropdown.Item icon={HiCurrencyDollar}>Earnings</Dropdown.Item> */}
+        
           <Dropdown.Divider />
           <Dropdown.Item icon={HiLogout} onClick={async () => {
-            // await authStore.logout()
+           
             navigate("/login");
           }}>Sign out</Dropdown.Item>
         </Dropdown>

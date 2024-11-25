@@ -1,7 +1,7 @@
-"use client";
 
 
-import { HiDotsVertical, HiChatAlt } from "react-icons/hi";
+
+import { HiDotsVertical, HiChatAlt,HiArrowLeft } from "react-icons/hi";
 import { Table, Dropdown, Button } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 const routes = [
@@ -52,9 +52,12 @@ export default function RouteTable() {
 
   return (
     <div className="container mx-auto p-4">
-      <Button color="light" onClick={() => navigate(-1)}>
-        Back
-      </Button>
+    <div className="mb-6" onClick={() => navigate(-1)}>
+        <Button color="light" className="flex items-center gap-2">
+          <HiArrowLeft className="h-5 w-5" />
+          Back
+        </Button>
+      </div>
 
       <div className="rounded-md border overflow-x-auto">
 

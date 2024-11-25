@@ -56,8 +56,8 @@ const OrdersList: React.FC = () => {
 
   return (
     <div className="p-6">
-          <Button color="light" onClick={() => navigate(-1)}>
-        Back
+          <Button color="light" className="mb-4"onClick={() => navigate(-1)}>
+          Back
       </Button>
   
       <div className="mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">

@@ -20,7 +20,7 @@ const sidebarTheme = {
       off: "w-64",
     },
     inner:
-      "h-full overflow-y-auto overflow-x-hidden bg-white px-3 py-4 dark:bg-gray-800",
+      "h-full overflow-y-auto overflow-x-hidden bg-gray-100  px-3 py-4 dark:bg-gray-800",
   },
   collapse: {
     button:

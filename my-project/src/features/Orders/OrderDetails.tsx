@@ -38,7 +38,7 @@ const OrderDetails: React.FC = () => {
   return (
     <div className="p-6 space-y-6">
       
-      <Button color="light" onClick={() => navigate(-1)}>
+      <Button color="light" className="mb-4" onClick={() => navigate(-1)}>
         Back
       </Button>
 

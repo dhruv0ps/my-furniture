@@ -23,12 +23,12 @@ export default function RouteDetails() {
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <Button color="light" className=" w-16 flex items-center"  onClick={() => navigate(-1)}>
-          <HiArrowLeft className="mr-2 h-5 w-5" />
+          <HiArrowLeft className="mr-2 h-5 w-4" />
           Back
         </Button>
         <div className="flex items-center justify-between w-full sm:w-auto">
           <h1 className="text-2xl font-semibold">Route Details</h1>
-          <Button color="info">Edit</Button>
+          <Button color="info" className="mb-2">Edit</Button>
         </div>
       </div>
 

@@ -7,7 +7,7 @@ const Timesheet: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-full">
-      {/* Back Button */}
+    
       <div className="mb-8">
         <Button
           color="light"
@@ -20,12 +20,11 @@ const Timesheet: React.FC = () => {
         </Button>
       </div>
 
-      {/* Title */}
+
       <h1 className="text-2xl font-semibold text-center mb-12">Fill Timesheet</h1>
 
-      {/* Cards Section */}
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Mark Login Card */}
+      
         <div className="p-6 bg-white border rounded-lg shadow flex-1">
           <h2 className="text-xl text-gray-600 mb-6 text-center">Mark Login</h2>
           <Button
@@ -37,7 +36,7 @@ const Timesheet: React.FC = () => {
           </Button>
         </div>
 
-        {/* Mark Logout Card */}
+       
         <div className="p-6 bg-white border rounded-lg shadow flex-1">
           <h2 className="text-xl text-gray-600 mb-6 text-center">Mark Logout</h2>
           <Button color="red" pill>

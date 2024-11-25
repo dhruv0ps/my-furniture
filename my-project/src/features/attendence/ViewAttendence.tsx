@@ -42,7 +42,7 @@ const TimesheetView: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      {/* Back Button */}
+    
       <div className="mb-8">
         <Button   onClick={() => navigate(-1)} outline pill>
           <span className="mr-2">←</span>
@@ -51,12 +51,12 @@ const TimesheetView: React.FC = () => {
         </Button>
       </div>
 
-      {/* Title */}
-      <h1 className="text-2xl font-semibold text-center mb-8">View Timesheet</h1>
+      
+      <h1 className="text-2xl font-semibold text-center mb-10">View Timesheet</h1>
 
-      {/* Date Pickers and Apply Button */}
+   
       <div className="flex flex-col md:flex-row gap-4 mb-6">
-        {/* Start Date Picker */}
+        
         <TextInput
           type="date"
           className="w-64"
@@ -64,7 +64,7 @@ const TimesheetView: React.FC = () => {
           onChange={(e) => setStartDate(new Date(e.target.value))}
         />
 
-        {/* End Date Picker */}
+      
         <TextInput
           type="date"
           className="w-64"
@@ -72,13 +72,11 @@ const TimesheetView: React.FC = () => {
           onChange={(e) => setEndDate(new Date(e.target.value))}
         />
 
-        {/* Apply Button */}
         <Button color="success" className="sm:w-[100px]">
           Apply
         </Button>
       </div>
 
-      {/* Search Input */}
       <div className="mb-6">
         <TextInput
           placeholder="Search by username"
@@ -87,7 +85,7 @@ const TimesheetView: React.FC = () => {
         />
       </div>
 
-      {/* Timesheet Table */}
+      
       <div className="overflow-x-auto">
         <Table>
           <Table.Head>
