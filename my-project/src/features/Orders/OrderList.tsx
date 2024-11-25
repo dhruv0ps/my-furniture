@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Button, TextInput, Table } from "flowbite-react";
+import { Button, TextInput, Card } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft, Search, Phone, MapPin, DollarSign, CheckCircle, Clock } from 'lucide-react';
 
 type Order = {
   id: string;
@@ -55,58 +56,63 @@ const OrdersList: React.FC = () => {
   };
 
   return (
-    <div className="p-6">
-          <Button color="light" className="mb-4"onClick={() => navigate(-1)}>
-          Back
+    <div className="p-4">
+      <Button color="light" className="mb-4" onClick={() => navigate(-1)}>
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        Back
       </Button>
   
-      <div className="mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="mb-6 flex flex-col gap-2">
         <TextInput
-          placeholder="Search by Order ID, Customer Name, or Phone Number"
+          placeholder="Search orders..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full md:w-1/2"
+          className="w-full"
         />
-        <Button color="purple" onClick={handleSearch} className="w-full md:w-auto">
+        <Button color="purple" onClick={handleSearch} className="w-full">
+          <Search className="mr-2 h-4 w-4" />
           Search
         </Button>
       </div>
 
-      
-      <div className="overflow-x-auto border rounded-lg">
-        <Table>
-          <Table.Head>
-            <Table.HeadCell>Order ID</Table.HeadCell>
-            <Table.HeadCell>Customer Name</Table.HeadCell>
-            <Table.HeadCell>Phone Number</Table.HeadCell>
-            <Table.HeadCell>Shipping Address</Table.HeadCell>
-            <Table.HeadCell>Due Amount</Table.HeadCell>
-            <Table.HeadCell>Status</Table.HeadCell>
-          </Table.Head>
-          <Table.Body>
-            {orders.map((order) => (
-              <Table.Row
-                key={order.id}
-                className={`cursor-pointer ${
-                  order.isDelivered ? "bg-green-100" : "bg-white"
-                }`}
-                onClick={() => handleOrderClick(order.id)}
-              >
-                <Table.Cell className="font-medium">{order.id}</Table.Cell>
-                <Table.Cell>{order.customerName}</Table.Cell>
-                <Table.Cell>{order.customerPhone}</Table.Cell>
-                <Table.Cell>{order.shippingAddress}</Table.Cell>
-                <Table.Cell>{order.dueAmount}</Table.Cell>
-                <Table.Cell>
-                  {order.isDelivered ? "Delivered" : "Pending"}
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+      <div className="space-y-4">
+        {orders.map((order) => (
+          <Card
+            key={order.id}
+            className={`cursor-pointer ${
+              order.isDelivered ? "bg-green-50" : "bg-white"
+            }`}
+            onClick={() => handleOrderClick(order.id)}
+          >
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-bold">{order.id}</span>
+              <span className={`text-sm ${order.isDelivered ? "text-green-600" : "text-yellow-600"}`}>
+                {order.isDelivered ? (
+                  <><CheckCircle className="inline mr-1 h-4 w-4" /> Delivered</>
+                ) : (
+                  <><Clock className="inline mr-1 h-4 w-4" /> Pending</>
+                )}
+              </span>
+            </div>
+            <p className="font-medium">{order.customerName}</p>
+            <p className="text-sm text-gray-600 flex items-center">
+              <Phone className="mr-2 h-4 w-4" />
+              {order.customerPhone}
+            </p>
+            <p className="text-sm text-gray-600 flex items-center">
+              <MapPin className="mr-2 h-4 w-4" />
+              {order.shippingAddress}
+            </p>
+            <p className="text-sm text-gray-600 flex items-center">
+              <DollarSign className="mr-2 h-4 w-4" />
+              Due: {order.dueAmount}
+            </p>
+          </Card>
+        ))}
       </div>
     </div>
   );
 };
 
 export default OrdersList;
+
