@@ -3,7 +3,7 @@ import { Button, Label, Select, Textarea, TextInput } from "flowbite-react";
 import { ChevronLeft, Upload } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function AddExpense() {
+const AddExpense:React.FC = () =>{
   const [file, setFile] = useState<File | null>(null);
   const navigate = useNavigate();
 
@@ -141,3 +141,5 @@ export default function AddExpense() {
     </div>
   );
 }
+
+export default AddExpense;

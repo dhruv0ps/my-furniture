@@ -88,7 +88,7 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
             renderChevronIcon={(theme, open) => renderChevronIcon(theme, open)}
             aria-expanded={isSidebarOpen}
           >
-            <Sidebar.Item
+            {/* <Sidebar.Item
               as={Link}
               to="/"
               className={
@@ -96,7 +96,7 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
               }
             >
               Delivery Dashboard
-            </Sidebar.Item>
+            </Sidebar.Item> */}
             <Sidebar.Item
               as={Link}
               to="/timesheet"

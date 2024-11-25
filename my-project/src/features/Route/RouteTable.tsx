@@ -1,10 +1,18 @@
-
-
-
-import { HiDotsVertical, HiChatAlt,HiArrowLeft } from "react-icons/hi";
+import React from "react";
+import { HiDotsVertical, HiChatAlt, HiArrowLeft } from "react-icons/hi";
 import { Table, Dropdown, Button } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
-const routes = [
+
+type Route = {
+  id: string;
+  date: string;
+  stops: number;
+  mode: string;
+  status: string;
+  comments: number;
+};
+
+const routes: Route[] = [
   {
     id: "R16SEP2024B",
     date: "2024-09-16",
@@ -47,20 +55,25 @@ const routes = [
   },
 ];
 
-export default function RouteTable() {
-    const navigate = useNavigate();
+const RouteTable: React.FC = () => {
+  const navigate = useNavigate();
 
   return (
     <div className="container mx-auto p-4">
-    <div className="mb-6" onClick={() => navigate(-1)}>
-        <Button color="light" className="flex items-center gap-2">
+      {/* Back Button */}
+      <div className="mb-6">
+        <Button
+          color="light"
+          className="flex items-center gap-2"
+          onClick={() => navigate(-1)}
+        >
           <HiArrowLeft className="h-5 w-5" />
           Back
         </Button>
       </div>
 
+      {/* Route Table */}
       <div className="rounded-md border overflow-x-auto">
-
         <Table>
           <Table.Head>
             <Table.HeadCell>ROUTE ID</Table.HeadCell>
@@ -89,18 +102,23 @@ export default function RouteTable() {
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex justify-end gap-2">
-                   
-                    <Button color="info" size="sm" onClick={() => navigate(`/routedetails`)}>
-                      View stops
+                    <Button
+                      color="info"
+                      size="sm"
+                      onClick={() => navigate(`/routedetails`)}
+                    >
+                      View Stops
                     </Button>
-                  
                     <Button color="warning" size="sm">
-                    View Directions
+                      View Directions
                     </Button>
-                    <Button color="warning" size="sm" onClick={() => navigate(`/gasstop`)}>
-                    Add Gas Stop
+                    <Button
+                      color="warning"
+                      size="sm"
+                      onClick={() => navigate(`/gasstop`)}
+                    >
+                      Add Gas Stop
                     </Button>
-                   
                     <Dropdown
                       inline={true}
                       label={
@@ -120,4 +138,7 @@ export default function RouteTable() {
       </div>
     </div>
   );
-}
+};
+
+export default RouteTable;
+
