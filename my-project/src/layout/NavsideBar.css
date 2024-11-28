@@ -37,7 +37,7 @@
 }
 
 .nav-sidebar .sidebar-item-active {
-    background-color: black; /* Active background */
+    background-color: purple; /* Active background */
     color: white; /* Active text color */
     font-weight: bold; /* font-semibold */
 }

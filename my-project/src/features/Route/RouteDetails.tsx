@@ -1,239 +1,216 @@
-import React, { useState } from "react";
-import { HiArrowLeft } from "react-icons/hi";
-import {
-  Table,
-  Button,
-  Textarea,
-  Dropdown,
-  Card,
-  Modal,
-  TextInput,
-  Label,
-} from "flowbite-react";
+import  { useState } from "react";
+import { Button, Card } from "flowbite-react";
+import { ArrowLeft, ChevronDown, MapPin, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
-interface Delivery {
-  orderId: string;
+interface Stop {
+  orderNumber: string;
   status: string;
-  customer: string;
-  products: string;
-  dueAmount: string;
+  customer: {
+    name: string;
+    address: string;
+    unit: string;
+    zipcode: string;
+  };
+  products: Array<{
+    name: string;
+    quantity: number;
+  }>;
+  dueAmount: number;
 }
 
-const RouteDetails: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const deliveries: Delivery[] = [
-    {
-      orderId: "BT24091401",
-      status: "Processing (shipping)",
-      customer: "Selluck",
-      products: "0000014945 *1",
-      dueAmount: "$226.00",
-    },
-    // Add more delivery data here...
-  ];
+interface RouteDetailsProps {
+  id: string;
+  date: string;
+  start: string;
+  truck: string;
+  stops: Stop[];
+}
+
+export default function RouteDetails() {
+  const [expandedStop, setExpandedStop] = useState<string | null>(null); // Tracks expanded stop
+const navigate = useNavigate();
+
+  const routeDetails: RouteDetailsProps = {
+    id: "R16SEP2024B",
+    date: "2024-09-16",
+    start: "600 Matheson Blvd",
+    truck: "DAZT882",
+    stops: [
+      {
+        orderNumber: "HI24112801",
+        status: "Processing",
+        customer: {
+          name: "Shantanu Singh Bharadwaj",
+          address: "578 Linden Dr, Cambridge",
+          unit: "Unit 19, Buzzcode 123",
+          zipcode: "N3H5L5",
+        },
+        products: [
+          { name: "Transformers Sofa Set", quantity: 3 },
+          { name: "Transformers Love Seat", quantity: 2 },
+          { name: "Bombay Bedroom Set", quantity: 1 },
+        ],
+        dueAmount: 2800,
+      },
+      {
+        orderNumber: "HI24112802",
+        status: "Completed",
+        customer: {
+          name: "John Doe",
+          address: "123 Elm St, Waterloo",
+          unit: "Unit 12, Buzzcode 456",
+          zipcode: "N2L3G1",
+        },
+        products: [
+          { name: "Dining Table Set", quantity: 1 },
+          { name: "Office Chair", quantity: 5 },
+        ],
+        dueAmount: 1500,
+      },
+      {
+        orderNumber: "HI24112803",
+        status: "Pending",
+        customer: {
+          name: "Aisha Smith",
+          address: "45 Pine St, Toronto",
+          unit: "Unit 5, Buzzcode 789",
+          zipcode: "M4B1B5",
+        },
+        products: [
+          { name: "Queen Size Bed", quantity: 2 },
+          { name: "Nightstand", quantity: 4 },
+          { name: "Dresser", quantity: 1 },
+        ],
+        dueAmount: 2200,
+      },
+      {
+        orderNumber: "HI24112804",
+        status: "Processing",
+        customer: {
+          name: "Michael Johnson",
+          address: "90 Maple Ave, Mississauga",
+          unit: "Unit 10, Buzzcode 321",
+          zipcode: "L5B4M7",
+        },
+        products: [
+          { name: "Leather Sofa", quantity: 1 },
+          { name: "Coffee Table", quantity: 1 },
+          { name: "TV Stand", quantity: 2 },
+        ],
+        dueAmount: 3100,
+      },
+      {
+        orderNumber: "HI24112805",
+        status: "Processing",
+        customer: {
+          name: "Emily Chen",
+          address: "200 Main St, Brampton",
+          unit: "Unit 8, Buzzcode 654",
+          zipcode: "L6V2Z9",
+        },
+        products: [
+          { name: "Sectional Sofa", quantity: 1 },
+          { name: "Accent Chair", quantity: 2 },
+          { name: "Dining Table", quantity: 1 },
+        ],
+        dueAmount: 2700,
+      },
+    ],
+  };
+  
+
+  const toggleExpandStop = (orderNumber: string) => {
+    setExpandedStop(expandedStop === orderNumber ? null : orderNumber);
+  };
 
   return (
-    <div className="container mx-auto p-4 max-w-6xl">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <Button
-          color="light"
-          className="w-16 flex items-center"
-          onClick={() => navigate(-1)}
-        >
-          <HiArrowLeft className="mr-2 h-5 w-4" />
-          Back
-        </Button>
-        <div className="flex items-center justify-between w-full sm:w-auto">
-          <h1 className="text-2xl font-semibold">Route Details</h1>
-          <Button color="info" className="mb-2">
-            Edit
-          </Button>
-        </div>
+    <div className="min-h-screen flex flex-col">
+    {/* Back Button */}
+    <Button
+      color="light"
+      onClick={() => window.history.back()}
+      className="w-20 h-10 mb-2 flex items-center gap-2 p-4"
+    >
+      <ArrowLeft className="w-5 h-5" />
+      Back
+    </Button>
+
+    {/* Route Details Header */}
+    <div className="bg-gray-400 text-white py-4 px-6">
+      <div className="flex justify-between text-sm">
+        <p>Date: {routeDetails.date}</p>
+        <p>ID: {routeDetails.id}</p>
       </div>
-
-      <div className="space-y-8">
-        {/* Basic Information */}
-        <div className="bg-white rounded-lg border p-6">
-          <h2 className="text-lg font-semibold mb-6">Basic Information</h2>
-          <div className="grid gap-4">
-            <div className="grid grid-cols-[140px,1fr] items-center">
-              <span className="text-sm text-gray-500">Route Name</span>
-              <span>Route 2024-09-16</span>
-            </div>
-            <div className="grid grid-cols-[140px,1fr] items-center">
-              <span className="text-sm text-gray-500">Route Date</span>
-              <span>2024-09-16</span>
-            </div>
-            <div className="grid grid-cols-[140px,1fr] items-center">
-              <span className="text-sm text-gray-500">Route ID</span>
-              <span>R16SEP2024B</span>
-            </div>
-            <div className="grid grid-cols-[140px,1fr] items-center">
-              <span className="text-sm text-gray-500">Starting waypoint</span>
-              <span className="text-gray-500">Not Selected</span>
-            </div>
-            <div className="grid grid-cols-[140px,1fr] items-center">
-              <span className="text-sm text-gray-500">Assigned Team</span>
-              <span className="text-gray-500">Not Assigned</span>
-            </div>
-            <div className="grid grid-cols-[140px,1fr] items-center">
-              <span className="text-sm text-gray-500">Assigned Truck</span>
-              <span className="text-gray-500">Not Assigned</span>
-            </div>
-            <div className="grid grid-cols-[140px,1fr] items-center">
-              <span className="text-sm text-gray-500">Phase</span>
-              <Dropdown label="Draft">
-                <Dropdown.Item>Draft</Dropdown.Item>
-                <Dropdown.Item>In Progress</Dropdown.Item>
-                <Dropdown.Item>Completed</Dropdown.Item>
-              </Dropdown>
-            </div>
-          </div>
-        </div>
-
-        {/* Comments */}
-        <div className="bg-white rounded-lg border p-6">
-          <h2 className="text-lg font-semibold mb-6">Comments</h2>
-          <div className="text-gray-500 mb-4 text-center py-4">
-            No comments yet
-          </div>
-          <div className="space-y-4">
-            <Textarea
-              placeholder="Enter your comment"
-              className="min-h-[100px] resize-none"
-            />
-            <Button color="purple" className="w-full">
-              Add Comment
-            </Button>
-          </div>
-        </div>
-
-        {/* Delivery Stops */}
-        <div className="bg-white rounded-lg border p-6">
-          <h2 className="text-lg font-semibold mb-6">Delivery Stops</h2>
-
-          {/* Desktop Table */}
-          <div className="hidden md:block overflow-x-auto">
-            <Table>
-              <Table.Head>
-                <Table.HeadCell>ORDER ID</Table.HeadCell>
-                <Table.HeadCell>STATUS</Table.HeadCell>
-                <Table.HeadCell>CUSTOMER</Table.HeadCell>
-                <Table.HeadCell className="hidden lg:table-cell">
-                  PRODUCTS
-                </Table.HeadCell>
-                <Table.HeadCell>DUE AMT.</Table.HeadCell>
-                <Table.HeadCell>
-                  <span className="sr-only">Actions</span>
-                </Table.HeadCell>
-              </Table.Head>
-              <Table.Body>
-                {deliveries.map((delivery) => (
-                  <Table.Row
-                    key={delivery.orderId}
-                    className="whitespace-nowrap"
-                  >
-                    <Table.Cell className="font-medium">
-                      {delivery.orderId}
-                    </Table.Cell>
-                    <Table.Cell>{delivery.status}</Table.Cell>
-                    <Table.Cell>{delivery.customer}</Table.Cell>
-                    <Table.Cell className="hidden lg:table-cell">
-                      {delivery.products}
-                    </Table.Cell>
-                    <Table.Cell>{delivery.dueAmount}</Table.Cell>
-                    <Table.Cell>
-                      <Button color="info" size="sm">
-                        Edit Route
-                      </Button>
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </div>
-
-          {/* Mobile Cards */}
-          <div className="md:hidden space-y-4">
-            {deliveries.map((delivery) => (
-              <Card key={delivery.orderId} className="border rounded-lg shadow-sm">
-                <div className="p-4 space-y-2">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <p className="font-semibold">{delivery.orderId}</p>
-                      <p className="text-sm text-gray-500">{delivery.customer}</p>
-                    </div>
-                    <Button color="info" size="sm">
-                      Edit Route
-                    </Button>
-                  </div>
-                  <div className="text-sm">
-                    <p>Status: {delivery.status}</p>
-                    <p>Due Amount: {delivery.dueAmount}</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Custom Added Stops */}
-        <div className="bg-white rounded-lg border p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Custom Added Stops</h2>
-            <Button color="info" onClick={() => setIsOpen(true)}>
-              + Add Stop
-            </Button>
-          </div>
-        </div>
-
-        {/* Modal for Custom Stops */}
-        <Modal show={isOpen} size="md" onClose={() => setIsOpen(false)}>
-          <Modal.Header>
-            <div className="flex items-center justify-between">
-              <span>Add Custom Stop</span>
-            </div>
-          </Modal.Header>
-          <Modal.Body>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setIsOpen(false);
-              }}
-              className="space-y-4"
-            >
-              <div>
-                <Label htmlFor="reason" value="Reason:" />
-                <TextInput id="reason" type="text" required />
-              </div>
-              <div>
-                <Label htmlFor="person" value="Person:" />
-                <TextInput id="person" type="text" required />
-              </div>
-              <div>
-                <Label htmlFor="address" value="Select Address:" />
-                <TextInput id="address" placeholder="Enter a location" required />
-              </div>
-              <div className="flex gap-3 mt-4">
-                <Button type="submit" color="purple">
-                  Confirm
-                </Button>
-                <Button
-                  type="button"
-                  color="gray"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </form>
-          </Modal.Body>
-        </Modal>
+      <div className="flex justify-between text-sm">
+        <p>Start: {routeDetails.start}</p>
+        <p>Truck: {routeDetails.truck}</p>
       </div>
     </div>
-  );
-};
 
-export default RouteDetails;
+    {/* Main Content Area */}
+    <div className="container overflow-y-auto mx-auto py-6 px-4 flex-grow space-y-4 mt-2 mb-16"> {/* Added mb-16 for footer spacing */}
+      {routeDetails.stops.map((stop) => (
+        <Card key={stop.orderNumber} className="border rounded-lg">
+          <div className="relative">
+            {/* Expand Arrow Positioned at Top-Right */}
+            <button
+              className="absolute top-0 right-0"
+              onClick={() => toggleExpandStop(stop.orderNumber)}
+            >
+              <ChevronDown
+                className={`w-5 h-5 transition-transform ${
+                  expandedStop === stop.orderNumber ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            <div>
+              <p className="font-semibold text-lg text-purple-700">{stop.orderNumber} | {stop.status}</p>
+              <p className="text-sm font-semibold text-purple-700">{stop.customer.name}</p>
+              <p className="text-sm text-gray-600">
+                {stop.customer.address}, {stop.customer.unit}, {stop.customer.zipcode}
+              </p>
+            </div>
+
+            {/* Expanded Details */}
+            {expandedStop === stop.orderNumber && (
+              <div className="mt-4 space-y-2 text-sm text-gray-600">
+                {stop.products.map((product, index) => (
+                  <p key={index}>
+                    {product.name} QTY {product.quantity}
+                  </p>
+                ))}
+                <p className="text-red-500 font-bold">DUE AMOUNT: ${stop.dueAmount}</p>
+                <Button
+                  color="purple"
+                  className="w-full hover:bg-purple-700 mt-4"
+                >
+                  PROCESS ORDER →
+                </Button>
+              </div>
+            )}
+          </div>
+        </Card>
+      ))}
+    </div>
+
+    {/* Fixed Footer */}
+    <div className="bg-white shadow  bottom-0 left-0 right-0 flex justify-between mt-6 ">
+      <Button
+        color="purple"
+        className="flex items-center justify-center gap-2 w-1/2 mr-2"
+      >
+        <MapPin className="w-5 h-5" />
+        OPEN IN MAP
+      </Button>
+      <Button
+        color="purple"
+        className="flex items-center justify-center gap-2 w-1/2 ml-2"
+        onClick={() => navigate(`/gasstop`)}
+      >
+        <Plus className="w-5 h-5 " />
+        ADD GAS STOP
+      </Button>
+    </div>
+  </div>
+  );
+}

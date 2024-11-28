@@ -9,20 +9,20 @@ const CustomStopsHeader: React.FC = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between py-4">
+      <div className="flex flex-col md:flex-row items-center justify-between py-4 gap-4">
         {/* Back Button */}
-        <Button color="light" onClick={() => navigate(-1)}>
+        <Button color="light" onClick={() => navigate(-1)} className="w-full md:w-auto">
           Back
         </Button>
 
         {/* Title */}
-        <h2 className="text-lg font-semibold">Custom Added Stops</h2>
+        <h2 className="text-lg font-semibold text-center md:text-left">Custom Added Stops</h2>
 
         {/* Add Stop Button */}
         <Button
           color="purple"
           onClick={() => setIsOpen(true)}
-          className="flex items-center"
+          className="flex items-center w-full md:w-auto"
         >
           <HiPlus className="mr-2 h-5 w-5" />
           Add Stop
@@ -71,14 +71,15 @@ const CustomStopsHeader: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-3 mt-4">
-              <Button type="submit" color="purple">
+            <div className="flex flex-col md:flex-row gap-3 mt-4">
+              <Button type="submit" color="purple" className="w-full md:w-auto">
                 Confirm
               </Button>
               <Button
                 type="button"
                 color="gray"
                 onClick={() => setIsOpen(false)}
+                className="w-full md:w-auto"
               >
                 Cancel
               </Button>

@@ -81,48 +81,7 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
     >
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          {/* Delivery Section */}
-          <Sidebar.Collapse
-            icon={HiChartBar}
-            label="Delivery"
-            renderChevronIcon={(theme, open) => renderChevronIcon(theme, open)}
-            aria-expanded={isSidebarOpen}
-          >
-            {/* <Sidebar.Item
-              as={Link}
-              to="/"
-              className={
-                location.pathname === "/" ? "sidebar-item-active" : "sidebar-item"
-              }
-            >
-              Delivery Dashboard
-            </Sidebar.Item> */}
-            <Sidebar.Item
-              as={Link}
-              to="/timesheet"
-              className={
-                location.pathname === "/timesheet"
-                  ? "sidebar-item-active"
-                  : "sidebar-item"
-              }
-            >
-              Mark Login/Logout
-            </Sidebar.Item>
-            <Sidebar.Item
-              as={Link}
-              to="/timesheet-view"
-              className={
-                location.pathname === "/timesheet-view"
-                  ? "sidebar-item-active"
-                  : "sidebar-item"
-              }
-            >
-              View Login/Logout
-            </Sidebar.Item>
-          </Sidebar.Collapse>
-
-          {/* Routes Section */}
-          <Sidebar.Collapse
+        <Sidebar.Collapse
             icon={FaBoxOpen}
             label="Routes"
             renderChevronIcon={(theme, open) => renderChevronIcon(theme, open)}
@@ -151,8 +110,7 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
               View Routes
             </Sidebar.Item>
           </Sidebar.Collapse>
-
-          {/* Orders Section */}
+          {/* Delivery Section */}
           <Sidebar.Collapse
             icon={FaShoppingCart}
             label="Orders"
@@ -182,15 +140,13 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
               Create Order
             </Sidebar.Item>
           </Sidebar.Collapse>
-
-          {/* Users Section */}
           <Sidebar.Collapse
             icon={FaUsers}
             label="Expense"
             renderChevronIcon={(theme, open) => renderChevronIcon(theme, open)}
             aria-expanded={isSidebarOpen}
           >
-            <Sidebar.Item
+            {/* <Sidebar.Item
               as={Link}
               to="/expense"
               className={
@@ -200,7 +156,7 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
               }
             >
               Expense List
-            </Sidebar.Item>
+            </Sidebar.Item> */}
             <Sidebar.Item
               as={Link}
               to="/expense/add"
@@ -212,7 +168,7 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
             >
               Add Expense
             </Sidebar.Item>
-            <Sidebar.Item
+            {/* <Sidebar.Item
               as={Link}
               to="/expense/category"
               className={
@@ -222,8 +178,8 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
               }
             >
               Expense Category
-            </Sidebar.Item>
-            <Sidebar.Item
+            </Sidebar.Item> */}
+            {/* <Sidebar.Item
               as={Link}
               to="/expense/report"
               className={
@@ -233,8 +189,55 @@ const NavSideBar: React.FC<NavSideBarProps> = ({ isSidebarOpen }) => {
               }
             >
               Expense Report
-            </Sidebar.Item>
+            </Sidebar.Item> */}
           </Sidebar.Collapse>
+          <Sidebar.Collapse
+            icon={HiChartBar}
+            label="Attendence"
+            renderChevronIcon={(theme, open) => renderChevronIcon(theme, open)}
+            aria-expanded={isSidebarOpen}
+          >
+            {/* <Sidebar.Item
+              as={Link}
+              to="/"
+              className={
+                location.pathname === "/" ? "sidebar-item-active" : "sidebar-item"
+              }
+            >
+              Delivery Dashboard
+            </Sidebar.Item> */}
+            <Sidebar.Item
+              as={Link}
+              to="/timesheet"
+              className={
+                location.pathname === "/timesheet"
+                  ? "sidebar-item-active"
+                  : "sidebar-item"
+              }
+            >
+              Mark Attendence
+            </Sidebar.Item>
+            {/* <Sidebar.Item
+              as={Link}
+              to="/timesheet-view"
+              className={
+                location.pathname === "/timesheet-view"
+                  ? "sidebar-item-active"
+                  : "sidebar-item"
+              }
+            >
+              View Login/Logout
+            </Sidebar.Item> */}
+          </Sidebar.Collapse>
+
+          {/* Routes Section */}
+      
+
+          {/* Orders Section */}
+       
+
+          {/* Users Section */}
+          
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

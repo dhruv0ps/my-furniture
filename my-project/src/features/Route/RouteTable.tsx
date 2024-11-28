@@ -1,144 +1,130 @@
-import React from "react";
-import { HiDotsVertical, HiChatAlt, HiArrowLeft } from "react-icons/hi";
-import { Table, Dropdown, Button } from "flowbite-react";
+import { Card } from "flowbite-react";
+import { Dropdown, Button, Table } from "flowbite-react";
+import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-type Route = {
+interface Route {
   id: string;
+  name: string;
   date: string;
-  stops: number;
-  mode: string;
-  status: string;
-  comments: number;
-};
+  start: string;
+  truck: string;
+}
 
-const routes: Route[] = [
-  {
-    id: "R16SEP2024B",
-    date: "2024-09-16",
-    stops: 1,
-    mode: "Draft",
-    status: "Pending",
-    comments: 0,
-  },
-  {
-    id: "R20SEP2024A",
-    date: "2024-09-20",
-    stops: 1,
-    mode: "Finalized",
-    status: "Pending",
-    comments: 0,
-  },
-  {
-    id: "R21SEP2024A",
-    date: "2024-09-21",
-    stops: 3,
-    mode: "Draft",
-    status: "Pending",
-    comments: 0,
-  },
-  {
-    id: "R22SEP2024A",
-    date: "2024-09-22",
-    stops: 1,
-    mode: "Draft",
-    status: "Pending",
-    comments: 0,
-  },
-  {
-    id: "R23SEP2024A",
-    date: "2024-09-23",
-    stops: 1,
-    mode: "Draft",
-    status: "Pending",
-    comments: 0,
-  },
-];
-
-const RouteTable: React.FC = () => {
+export default function RouteCards() {
   const navigate = useNavigate();
+
+  const routes: Route[] = [
+    {
+      id: "R16SEP2024B",
+      name: "Route 2024-09-16",
+      date: "2024-09-16",
+      start: "600 Matheson Blvd",
+      truck: "DAZT882",
+    },
+    {
+      id: "R16SEP2024B",
+      name: "Route 2024-09-16",
+      date: "2024-09-16",
+      start: "600 Matheson Blvd",
+      truck: "DAZT882",
+    },
+    {
+      id: "R16SEP2024B",
+      name: "Route 2024-09-16",
+      date: "2024-09-16",
+      start: "600 Matheson Blvd",
+      truck: "DAZT882",
+    },
+    {
+      id: "R16SEP2024B",
+      name: "Route 2024-09-16",
+      date: "2024-09-16",
+      start: "600 Matheson Blvd",
+      truck: "DAZT882",
+    },
+  ];
+  const handleCardClick = (id: string) => {
+    navigate(`/routedetails/${id}`);
+  };
+  // Mobile view with cards
+  const MobileView = () => (
+    <div className="space-y-2">
+      {routes.map((route, index) => (
+       <Card
+       key={index}
+       className="border-2 cursor-pointer hover:shadow-md transition-shadow"
+       onClick={() => handleCardClick(route.id)}
+     >
+          <div className=" space-y-1">
+            <p className="text-lg font-semibold text-purple-700">
+              Name: <span className="text-black">{route.name}</span>
+            </p>
+            <p className="text-lg font-semibold text-purple-700">
+              Date: <span className="text-black">{route.date}</span>
+            </p>
+            <p className="text-lg font-semibold text-purple-700">
+              ID: <span className="text-black">{route.id}</span>
+            </p>
+            <p className="text-xs text-gray-600">
+              Start: <span>{route.start}</span>
+            </p>
+            <p className="text-xs text-gray-600">
+              Truck: <span>{route.truck}</span>
+            </p>
+          </div>
+        
+        </Card>
+      ))}
+    </div>
+  );
+
+  // Desktop view with table
+  const DesktopView = () => (
+    <Table>
+      <Table.Head>
+        <Table.HeadCell>Name</Table.HeadCell>
+        <Table.HeadCell>Date</Table.HeadCell>
+        <Table.HeadCell>ID</Table.HeadCell>
+        <Table.HeadCell>Start Location</Table.HeadCell>
+        <Table.HeadCell>Truck</Table.HeadCell>
+        <Table.HeadCell>Actions</Table.HeadCell>
+      </Table.Head>
+      <Table.Body>
+        {routes.map((route, index) => (
+          <Table.Row key={index}>
+            <Table.Cell className="text-blue-800 font-bold">{route.name}</Table.Cell>
+            <Table.Cell className="text-gray-700">{route.date}</Table.Cell>
+            <Table.Cell className="text-gray-700">{route.id}</Table.Cell>
+            <Table.Cell className="text-gray-500 text-xs">{route.start}</Table.Cell>
+            <Table.Cell className="text-gray-500 text-xs">{route.truck}</Table.Cell>
+            <Table.Cell>
+              <Dropdown label="Actions" inline={true}>
+                <Dropdown.Item>View Stops</Dropdown.Item>
+                <Dropdown.Item>View Directions</Dropdown.Item>
+                <Dropdown.Item>Add Gas Stop</Dropdown.Item>
+              </Dropdown>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  );
 
   return (
     <div className="container mx-auto p-4">
-      {/* Back Button */}
       <div className="mb-6">
-        <Button
-          color="light"
-          className="flex items-center gap-2"
-          onClick={() => navigate(-1)}
-        >
-          <HiArrowLeft className="h-5 w-5" />
+        <Button outline={true} size="sm" color="gray" onClick={() => navigate(-1)}>
+          <ArrowLeft className="mr-2 h-4 w-4" />
           Back
         </Button>
       </div>
-
-      {/* Route Table */}
-      <div className="rounded-md border overflow-x-auto">
-        <Table>
-          <Table.Head>
-            <Table.HeadCell>ROUTE ID</Table.HeadCell>
-            <Table.HeadCell>ROUTE DATE</Table.HeadCell>
-            <Table.HeadCell>DELIVERY STOPS</Table.HeadCell>
-            <Table.HeadCell>MODE</Table.HeadCell>
-            <Table.HeadCell>ROUTE STATUS</Table.HeadCell>
-            <Table.HeadCell>COMMENTS</Table.HeadCell>
-            <Table.HeadCell>
-              <span className="sr-only">Actions</span>
-            </Table.HeadCell>
-          </Table.Head>
-          <Table.Body>
-            {routes.map((route) => (
-              <Table.Row key={route.id}>
-                <Table.Cell className="font-medium">{route.id}</Table.Cell>
-                <Table.Cell>{route.date}</Table.Cell>
-                <Table.Cell>{route.stops}</Table.Cell>
-                <Table.Cell>{route.mode}</Table.Cell>
-                <Table.Cell>{route.status}</Table.Cell>
-                <Table.Cell>
-                  <div className="flex items-center gap-1">
-                    <HiChatAlt className="h-4 w-4" />
-                    <span>{route.comments}</span>
-                  </div>
-                </Table.Cell>
-                <Table.Cell>
-                  <div className="flex justify-end gap-2">
-                    <Button
-                      color="info"
-                      size="sm"
-                      onClick={() => navigate(`/routedetails`)}
-                    >
-                      View Stops
-                    </Button>
-                    <Button color="warning" size="sm">
-                      View Directions
-                    </Button>
-                    <Button
-                      color="warning"
-                      size="sm"
-                      onClick={() => navigate(`/gasstop`)}
-                    >
-                      Add Gas Stop
-                    </Button>
-                    <Dropdown
-                      inline={true}
-                      label={
-                        <HiDotsVertical className="h-5 w-5 text-gray-700 dark:text-gray-200" />
-                      }
-                    >
-                      <Dropdown.Item>View Stops</Dropdown.Item>
-                      <Dropdown.Item>View Directions</Dropdown.Item>
-                      <Dropdown.Item>Add Gas Stop</Dropdown.Item>
-                    </Dropdown>
-                  </div>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+      <div className="block md:hidden">
+        <MobileView />
+      </div>
+      <div className="hidden md:block">
+        <DesktopView />
       </div>
     </div>
   );
-};
-
-export default RouteTable;
-
+}

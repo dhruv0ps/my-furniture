@@ -72,7 +72,7 @@ const TimesheetView: React.FC = () => {
           onChange={(e) => setEndDate(new Date(e.target.value))}
         />
 
-        <Button color="success" className="sm:w-[100px]">
+        <Button color="success" className="w-20px">
           Apply
         </Button>
       </div>
