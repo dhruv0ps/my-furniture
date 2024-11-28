@@ -15,7 +15,7 @@ const Timesheet: React.FC = () => {
   const videoConstraints = {
     width: 1280,
     height: 720,
-    facingMode: "environment", // Use back camera for mobile
+    facingMode: "user", // Use back camera for mobile
   };
 
   const startCamera = (actionType: string) => {
