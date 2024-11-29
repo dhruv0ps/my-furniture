@@ -85,7 +85,7 @@ const OrdersList: React.FC = () => {
             onClick={() => handleOrderClick(order.id)}
           >
             <div className="flex justify-between items-center mb-2">
-              <span className="font-bold">{order.id}</span>
+              <span className="font-bold text-purple-700">{order.id}</span>
               <span className={`text-sm ${order.isDelivered ? "text-green-600" : "text-yellow-600"}`}>
                 {order.isDelivered ? (
                   <><CheckCircle className="inline mr-1 h-4 w-4" /> Delivered</>
@@ -94,8 +94,8 @@ const OrdersList: React.FC = () => {
                 )}
               </span>
             </div>
-            <p className="font-medium">{order.customerName}</p>
-            <p className="text-sm text-gray-600 flex items-center">
+            <p className="font-medium text-purple-700">{order.customerName}</p>
+            <p className="text-sm text-purple-700 flex items-center">
               <Phone className="mr-2 h-4 w-4" />
               {order.customerPhone}
             </p>

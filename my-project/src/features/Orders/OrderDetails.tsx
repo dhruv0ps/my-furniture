@@ -65,7 +65,7 @@ const OrderDetails: React.FC = () => {
           <div>
             <h1 className="font-semibold text-lg text-purple-700">Order Details</h1>
             <p>
-              <strong>Order ID:</strong> {orderId}
+              <strong>Order ID:</strong> {orderId} 200020020
             </p>
             <p>
               <strong>Customer Name:</strong> Chandni Patel

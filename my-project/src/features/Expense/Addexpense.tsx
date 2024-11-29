@@ -37,11 +37,11 @@ const AddExpense:React.FC = () =>{
           <ChevronLeft className="h-4 w-4" />
           Back
         </Button>
-        <h1 className="text-xl md:text-2xl font-semibold">Add Expense</h1>
+      
         <div className="w-[72px]" />
       </div>
 
-   
+      <h1 className="text-xl md:text-2xl font-semibold mt-2 flex justify-center mb-2">Add Expense</h1>
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-lg">
         <form className="space-y-6" onSubmit={handleSubmit}>
         
@@ -133,7 +133,7 @@ const AddExpense:React.FC = () =>{
           </div>
 
         
-          <Button type="submit" className="w-full mt-6 bg-blue-600 hover:bg-blue-700">
+          <Button type="submit" color="purple" className="w-full mt-6">
             Add Expense
           </Button>
         </form>
