@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HiPlus } from "react-icons/hi";
+import { HiPlus,HiArrowLeft } from "react-icons/hi";
 import { Button, Modal, Label, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,10 +11,16 @@ const CustomStopsHeader: React.FC = () => {
     <>
       <div className="flex flex-col md:flex-row items-center justify-between py-4 gap-4">
         {/* Back Button */}
-        <Button color="light" onClick={() => navigate(-1)} className="w-full md:w-auto">
+        <div className="mb-6">
+        <Button
+          color="light"
+          className="flex items-center gap-2"
+          onClick={() => navigate(-1)}
+        >
+          <HiArrowLeft className="h-5 w-5" />
           Back
         </Button>
-
+      </div>
         {/* Title */}
         <h2 className="text-lg font-semibold text-center md:text-left">Custom Added Stops</h2>
 

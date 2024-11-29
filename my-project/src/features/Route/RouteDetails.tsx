@@ -27,7 +27,7 @@ interface RouteDetailsProps {
 }
 
 export default function RouteDetails() {
-  const [expandedStop, setExpandedStop] = useState<string | null>(null); // Tracks expanded stop
+  const [expandedStop, setExpandedStop] = useState<string | null>(null); 
 const navigate = useNavigate();
 
   const routeDetails: RouteDetailsProps = {
@@ -136,7 +136,7 @@ const navigate = useNavigate();
     </Button>
 
     {/* Route Details Header */}
-    <div className="bg-gray-400 text-white py-4 px-6">
+    <div className="bg-gray-400 border rounded-lg text-white py-4 px-6">
       <div className="flex justify-between text-sm">
         <p>Date: {routeDetails.date}</p>
         <p>ID: {routeDetails.id}</p>
@@ -147,12 +147,12 @@ const navigate = useNavigate();
       </div>
     </div>
 
-    {/* Main Content Area */}
-    <div className="container overflow-y-auto mx-auto py-6 px-4 flex-grow space-y-4 mt-2 mb-16"> {/* Added mb-16 for footer spacing */}
+    
+    <div className="container overflow-y-auto mx-auto py-6 px-4 flex-grow space-y-4 mt-2 mb-16"> 
       {routeDetails.stops.map((stop) => (
         <Card key={stop.orderNumber} className="border rounded-lg">
           <div className="relative">
-            {/* Expand Arrow Positioned at Top-Right */}
+           
             <button
               className="absolute top-0 right-0"
               onClick={() => toggleExpandStop(stop.orderNumber)}
