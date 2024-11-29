@@ -1,7 +1,7 @@
 import React from "react";
 import { Sidebar } from "flowbite-react";
 // import { HiOutlineMinusSm, HiOutlinePlusSm } from "react-icons/hi";
-import { FaUsers, FaBoxOpen, FaShoppingCart } from "react-icons/fa";
+import { FaUsers, FaBoxOpen, } from "react-icons/fa";
 import { HiChartBar } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 // import { twMerge } from "tailwind-merge";
@@ -105,7 +105,7 @@ const NavSideBar: React.FC<NavSideBarProps> = ({
         </Sidebar.Item>
 
         {/* Orders Section */}
-        <Sidebar.Item
+        {/* <Sidebar.Item
           as={Link}
           to="/orders"
           className={
@@ -118,7 +118,7 @@ const NavSideBar: React.FC<NavSideBarProps> = ({
           <div className="flex">   <FaShoppingCart className="w-5 h-5 mr-2 mt-0.5" />
           Orders</div>
        
-        </Sidebar.Item>
+        </Sidebar.Item> */}
 
         {/* Expense Section */}
         <Sidebar.Item

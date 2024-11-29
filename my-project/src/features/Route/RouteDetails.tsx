@@ -183,6 +183,7 @@ const navigate = useNavigate();
                 <Button
                   color="purple"
                   className="w-full hover:bg-purple-700 mt-4"
+                  onClick={() => navigate(`/routes/orderitem`)}
                 >
                   PROCESS ORDER →
                 </Button>

@@ -13,6 +13,8 @@ import ExpenseList from './features/Expense/Expense';
 import AddExpense from './features/Expense/Addexpense';
 import ExpenseCategories from './features/Expense/ExpenseCategories';
 import ExpenseReport from './features/Expense/ExpenseReport';
+import OrderDetailsPage from './features/Route/OrderItem';
+
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,11 @@ const router = createBrowserRouter([
         element :<OrderDetails/>
       },
       {
+         path : "routes/orderitem",
+         element : <OrderDetailsPage/>
+      },
+     
+      {
         path: "expense",
         element : <ExpenseList/>
       },
@@ -65,7 +72,7 @@ const router = createBrowserRouter([
       },{
         path : "expense/report",
         element : <ExpenseReport/>
-      }
+      },
     ],
   },
   {
