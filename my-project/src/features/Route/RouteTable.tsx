@@ -152,7 +152,7 @@ export default function RouteCards() {
       </div>
 
       {/* Mobile and Desktop Views */}
-      <div className="block md:hidden">
+      <div className="block md:hidden overflow-y-auto">
         <MobileView />
       </div>
       <div className="hidden md:block">
