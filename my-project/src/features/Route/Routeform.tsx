@@ -3,7 +3,8 @@ import { format } from "date-fns";
 import { HiArrowLeft, HiCalendar } from "react-icons/hi";
 import { Button, Label, TextInput, Select } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const RouteForm: React.FC = () => {
   const [date, setDate] = useState<Date | null>(null);
   const navigate = useNavigate();
@@ -14,13 +15,13 @@ const RouteForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add form submission logic here
-    alert("Route added successfully!");
+   
+    toast.success("Route added successfully!");
   };
 
   return (
     <div className="container mx-auto p-4 max-w-2xl">
-      {/* Back Button */}
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="mb-6">
         <Button
           color="light"
@@ -32,14 +33,14 @@ const RouteForm: React.FC = () => {
         </Button>
       </div>
 
-      {/* Form Card */}
+    
       <div className="border border-gray-300 rounded-lg p-6 shadow-lg bg-white">
         <h1 className="text-xl md:text-2xl font-semibold text-center mb-6 overflow-y-auto">
           Add Route
         </h1>
 
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-          {/* Route Name */}
+        
           <div className="space-y-2">
             <Label htmlFor="routeName">Route Name</Label>
             <TextInput
@@ -51,7 +52,7 @@ const RouteForm: React.FC = () => {
             />
           </div>
 
-          {/* Route ID */}
+          
           <div className="space-y-2">
             <Label htmlFor="routeId">Route ID</Label>
             <TextInput
@@ -63,7 +64,7 @@ const RouteForm: React.FC = () => {
             />
           </div>
 
-          {/* Route Date */}
+         
           <div className="space-y-2">
             <Label>Route Date</Label>
             <div className="relative">
@@ -78,7 +79,7 @@ const RouteForm: React.FC = () => {
             </div>
           </div>
 
-          {/* Assign Team */}
+          
           <div className="space-y-2">
             <Label>Assign Team</Label>
             <Select id="assignTeam" required>
@@ -89,7 +90,7 @@ const RouteForm: React.FC = () => {
             </Select>
           </div>
 
-          {/* Start Location */}
+          
           <div className="space-y-2">
             <Label htmlFor="startLocation">Start Location</Label>
             <TextInput
@@ -100,7 +101,6 @@ const RouteForm: React.FC = () => {
             />
           </div>
 
-          {/* Truck */}
           <div className="space-y-2">
             <Label htmlFor="truck">Truck</Label>
             <TextInput
@@ -111,7 +111,7 @@ const RouteForm: React.FC = () => {
             />
           </div>
 
-          {/* Submit Button */}
+          
           <Button
             type="submit"
             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"

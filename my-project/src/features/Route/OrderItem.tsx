@@ -12,10 +12,10 @@ export default function OrderDetailsPage() {
   const navigate = useNavigate();
 
   const [items] = useState<OrderItem[]>([
-    { name: "Transformers Sofa Set", uid: "XXXX-XXXX-XXXX", sku: "42880428", status: "Delivered" },
-    { name: "Transformers Sofa Set", uid: "XXXX-XXXX-XXXX", sku: "42880428", status: "Delivered" },
-    { name: "Transformers Sofa Set", uid: "XXXX-XXXX-XXXX", sku: "42880428", status: "Delivered" },
-    { name: "Transformers Sofa Set", uid: "XXXX-XXXX-XXXX", sku: "42880428", status: "Delivered" },
+    { name: "Transformers Sofa Set", uid: "123", sku: "42880428", status: "Delivered" },
+    { name: "Transformers Sofa Set", uid: "890", sku: "42880428", status: "Delivered" },
+    { name: "Transformers Sofa Set", uid: "456", sku: "42880428", status: "Delivered" },
+    { name: "Transformers Sofa Set", uid: "1234", sku: "42880428", status: "Delivered" },
   ]);
 
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails>({
@@ -52,7 +52,35 @@ export default function OrderDetailsPage() {
 //  const handleUploadedFiles = (files: any) => {
 //     console.log("Uploaded files:", files);
 //   };
+const [emailError, setEmailError] = useState<string | null>(null);
+const [nameError, setNameError] = useState<string | null>(null);
 
+const validateEmail = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+const handleEmailChange = (email: string) => {
+  setPaymentDetails((prev) => ({ ...prev, senderEmail: email }));
+  if (!email) {
+    setEmailError("Email is required.");
+  } else if (!validateEmail(email)) {
+    setEmailError("Invalid email format.");
+  } else {
+    setEmailError(null);
+  }
+};
+
+const handleNameChange = (name: string) => {
+  setPaymentDetails((prev) => ({ ...prev, senderName: name }));
+  if (!name) {
+    setNameError("Name is required.");
+  } else if (name.length < 3) {
+    setNameError("Name must be at least 3 characters long.");
+  } else {
+    setNameError(null);
+  }
+};
   const handleDenominationChange = (index: number, increment: boolean) => {
     setDenominations((prev) =>
       prev.map((item, i) => {
@@ -102,9 +130,8 @@ export default function OrderDetailsPage() {
         return;
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(paymentDetails.senderEmail)) {
-        toast.error("Please enter a valid email address.");
+      if (emailError || nameError) {
+        toast.error("Please fix the errors in the INTERAC details.");
         return;
       }
     }
@@ -121,7 +148,7 @@ export default function OrderDetailsPage() {
     <div className="min-h-screen flex flex-col overflow-y-auto">
       <ToastContainer position="top-right" autoClose={3000} />
       
-      {/* Header */}
+     
       <header className="bg-[#2E2B7C] text-white p-4 flex items-center justify-between">
         <Button color="light" onClick={() => navigate(-1)} className="p-2">
           <ArrowLeft className="w-5 h-5" />
@@ -136,10 +163,10 @@ export default function OrderDetailsPage() {
       {/* Order Details */}
       <div className="bg-gray-400 border rounded-lg text-gray-600 py-4 px-6">
         <div className="space-y-1">
-          <p className="text-gray-600">HI24112801 | Processing</p>
-          <p className="font-medium">Shantanu Singh Bharadwaj</p>
-          <p className="text-gray-600">578 Linden Dr, Cambridge</p>
-          <p className="text-gray-600">Unit 19, Buzzcode 123, Zipcode N3H5L5</p>
+          <p className="">HI24112801 | Processing</p>
+          <p className="">Shantanu Singh Bharadwaj</p>
+          <p className="">578 Linden Dr, Cambridge</p>
+          <p className="">Unit 19, Buzzcode 123, Zipcode N3H5L5</p>
         </div>
       </div>
 
@@ -219,36 +246,37 @@ export default function OrderDetailsPage() {
             </div>
           ) : (
             <div className="space-y-4">
-              {paymentDetails.mode === "INTERAC" && (
-                <>
-                  <div className="space-y-2">
-                    <label className="block">SENDER's EMAIL ID:</label>
-                    <TextInput
-                      type="email"
-                      value={paymentDetails.senderEmail}
-                      onChange={(e) =>
-                        setPaymentDetails((prev) => ({
-                          ...prev,
-                          senderEmail: e.target.value,
-                        }))
-                      }
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block">SENDER's NAME:</label>
-                    <TextInput
-                      type="text"
-                      value={paymentDetails.senderName}
-                      onChange={(e) =>
-                        setPaymentDetails((prev) => ({
-                          ...prev,
-                          senderName: e.target.value,
-                        }))
-                      }
-                    />
-                  </div>
-                </>
-              )}
+            {paymentDetails.mode === "INTERAC" && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="block">SENDER's EMAIL ID:</label>
+                <TextInput
+                  type="email"
+                  value={paymentDetails.senderEmail}
+                  onChange={(e) => handleEmailChange(e.target.value)}
+                  placeholder="Enter sender's email"
+                  className={`w-full ${emailError ? "border-red-500" : ""}`}
+                />
+                {emailError && (
+                  <p className="text-red-500 text-sm mt-1">{emailError}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <label className="block">SENDER's NAME:</label>
+                <TextInput
+                  type="text"
+                  value={paymentDetails.senderName}
+                  onChange={(e) => handleNameChange(e.target.value)}
+                  placeholder="Enter sender's name"
+                  className={`w-full ${nameError ? "border-red-500" : ""}`}
+                />
+                {nameError && (
+                  <p className="text-red-500 text-sm mt-1">{nameError}</p>
+                )}
+              </div>
+            </div>
+          )}
               <div className="space-y-2">
                 <label className="block">ENTER AMOUNT:</label>
                 <div className="flex items-center gap-2">

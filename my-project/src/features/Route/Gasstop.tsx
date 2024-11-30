@@ -10,7 +10,7 @@ const CustomStopsHeader: React.FC = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row items-center justify-between py-4 gap-4">
-        {/* Back Button */}
+        
         <div className="mb-6">
         <Button
           color="light"
@@ -21,10 +21,10 @@ const CustomStopsHeader: React.FC = () => {
           Back
         </Button>
       </div>
-        {/* Title */}
+      
         <h2 className="text-lg font-semibold text-center md:text-left">Custom Added Stops</h2>
 
-        {/* Add Stop Button */}
+       
         <Button
           color="purple"
           onClick={() => setIsOpen(true)}
@@ -35,20 +35,18 @@ const CustomStopsHeader: React.FC = () => {
         </Button>
       </div>
 
-      {/* Modal */}
       <Modal
         show={isOpen}
         size="md"
         onClose={() => setIsOpen(false)}
       >
-        {/* Modal Header */}
+       
         <Modal.Header>
           <div className="flex items-center justify-between">
             <span>Add Custom Stop</span>
           </div>
         </Modal.Header>
 
-        {/* Modal Body */}
         <Modal.Body>
           <form
             onSubmit={(e) => {
@@ -58,7 +56,7 @@ const CustomStopsHeader: React.FC = () => {
             }}
             className="space-y-4"
           >
-            {/* Reason Input */}
+            
             <div>
               <Label htmlFor="reason" value="Reason:" />
               <TextInput id="reason" type="text" placeholder="Enter reason" required />

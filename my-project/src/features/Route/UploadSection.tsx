@@ -1,7 +1,8 @@
 import { useState, useCallback, useRef } from "react";
 import { Button, Modal } from "flowbite-react";
 import { Cloud, X, Camera, ImageIcon } from "lucide-react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface UploadedFile {
   id: string;
   file: File;
@@ -23,6 +24,11 @@ export default function UploadPage() {
       progress: 0,
     }));
 
+    if (files.length + newFiles.length > 6) {
+        toast.error("You can only upload a maximum of 6 images.");
+      return;
+    }
+
     setFiles((prev) => [...prev, ...newFiles]);
     setShowUploadDialog(false);
 
@@ -41,7 +47,7 @@ export default function UploadPage() {
         );
       }, 500);
     });
-  }, []);
+  }, [files]);
 
   const removeFile = (id: string) => {
     setFiles((prev) => {
@@ -66,23 +72,23 @@ export default function UploadPage() {
   const handleCameraSelect = () => {
     cameraInputRef.current?.click();
     setShowUploadDialog(false);
-  };
-
+  }
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      
+       <ToastContainer position="top-right" autoClose={3000} />
       <div className="flex-1 p-4">
       
       
-        <div
-          onClick={handleUploadClick}
-          className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-gray-400 transition-colors"
-        >
-          <Cloud className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-          <p className="text-gray-500">Tap here to upload</p>
-          <p className="text-sm text-gray-400 mt-1">Max file size 5MB</p>
+      <div
+        onClick={handleUploadClick}
+        className="border-2 border-dashed border-blue-200 rounded-lg p-8 text-center cursor-pointer hover:border-blue-300 transition-colors bg-white shadow-sm"
+      >
+        <div className="bg-blue-50 rounded-full p-3 inline-block mb-4">
+          <Cloud className="w-8 h-8 text-blue-500 mt-2" />
         </div>
-
+        <p className="text-gray-700 font-medium mb-4">tap here to upload images</p>
+       {/* <p className="text-xs text-gray-400 mt-2">Max file size 5MB</p> */}
+      </div>
     
         <input
           ref={fileInputRef}
@@ -103,7 +109,7 @@ export default function UploadPage() {
 
     
         {files.length > 0 && (
-          <div className="mt-8 grid grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-3 gap-4 pt-4 ">
             {files.map((file) => (
               <div key={file.id} className="relative aspect-square">
                 <img
@@ -117,12 +123,11 @@ export default function UploadPage() {
                   </span>
                 </div>
                 <button
-                  onClick={() => removeFile(file.id)}
-                  className="absolute -top- -right-2 p-1 shadow-lg"
-                  style={{ backgroundColor : "red"}}
-                >
-                  <X className="w-4 h-4" />
-                </button>
+          onClick={() => removeFile(file.id)}
+          className="absolute top-2 right-2 p-2 bg-red-500 rounded-full text-white hover:bg-red-600 shadow-lg"
+        >
+          <X className="w-4 h-4" style={{backgroundColor:"Red"}} />
+        </button>
               </div>
             ))}
           </div>
@@ -135,18 +140,20 @@ export default function UploadPage() {
         <Modal.Body>
           <div className="grid grid-cols-2 gap-4">
             <Button
+            color="purple"
               onClick={handleCameraSelect}
               className="h-24 flex flex-col items-center justify-center gap-2"
             >
-              <Camera className="h-8 w-8" />
-              Camera
+              <Camera className="h-6 w-8 " />
+              <p className="pt-1">Camera</p>
             </Button>
             <Button
+            color="purple"
               onClick={handleGallerySelect}
               className="h-24 flex flex-col items-center justify-center gap-2"
             >
-              <ImageIcon className="h-8 w-8" />
-              Gallery
+              <ImageIcon className="h-6 w-8" />
+              <p className="pt-1">Gallery</p>
             </Button>
           </div>
         </Modal.Body>

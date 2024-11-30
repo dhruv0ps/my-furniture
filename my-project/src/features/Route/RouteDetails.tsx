@@ -125,7 +125,7 @@ const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex flex-col">
-    {/* Back Button */}
+    
     <Button
       color="light"
       onClick={() => window.history.back()}
@@ -135,7 +135,7 @@ const navigate = useNavigate();
       Back
     </Button>
 
-    {/* Route Details Header */}
+    
     <div className="bg-gray-400 border rounded-lg text-white py-4 px-6">
       <div className="flex justify-between text-sm">
         <p>Date: {routeDetails.date}</p>
@@ -171,7 +171,7 @@ const navigate = useNavigate();
               </p>
             </div>
 
-            {/* Expanded Details */}
+        
             {expandedStop === stop.orderNumber && (
               <div className="mt-4 space-y-2 text-sm text-gray-600">
                 {stop.products.map((product, index) => (
@@ -194,7 +194,7 @@ const navigate = useNavigate();
       ))}
     </div>
 
-    {/* Fixed Footer */}
+   
     <div className="bg-white shadow  bottom-0 left-0 right-0 flex justify-between mt-6 ">
       <Button
         color="purple"

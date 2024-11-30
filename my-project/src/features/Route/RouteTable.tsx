@@ -47,7 +47,7 @@ export default function RouteCards() {
     },
   ];
 
-  // Initialize filtered routes
+  
   if (!filteredRoutes.length) setFilteredRoutes(routes);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +67,7 @@ export default function RouteCards() {
     navigate(`/routedetails/${id}`);
   };
 
-  // Mobile view with cards
+
   const MobileView = () => (
     <div className="space-y-2">
       {filteredRoutes.map((route, index) => (
@@ -98,7 +98,7 @@ export default function RouteCards() {
     </div>
   );
 
-  // Desktop view with table
+  
   const DesktopView = () => (
     <Table>
       <Table.Head>
@@ -132,7 +132,7 @@ export default function RouteCards() {
 
   return (
     <div className="container mx-auto p-4">
-      {/* Back Button and Search Field */}
+    
       <Button outline={true} size="sm" color="gray" onClick={() => navigate(-1)}>
           <ArrowLeft className="mr-2  h-4 w-4" />
           Back
